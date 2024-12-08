@@ -12,6 +12,6 @@
 
 
 ## Add sahi algorithm to improve detection performance
-![The comparison of increasing the sahi algorithm](Output\\yolo_only.jpg)
+![The comparison of increasing the sahi algorithm](/Output/yolo_only.jpg)
 ## Calculate football speed
 - This part has yet to be perfected
