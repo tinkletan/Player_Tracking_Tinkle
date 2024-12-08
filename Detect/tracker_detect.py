@@ -3,7 +3,7 @@ os.environ['KMP_DUPLICATE_LIB_OK']='True'
 import cv2
 from ultralytics import YOLO
 
-model = YOLO('D:/SIT220/detect/train/weights/best.pt')          ### weights from trained model
+model = YOLO('D:/SIT220/detect/train/weights/best.pt')        
 
 # Open the video file
 video_path = r"D:\SIT220\Player_Tracking\test1.mp4"
