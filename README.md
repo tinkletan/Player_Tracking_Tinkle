@@ -21,4 +21,5 @@ We can see that using the SAHI algorithm can indeed improve the accuracy of smal
 
 
 ## Calculate football speed
-- This part has yet to be perfected
+- Realize the calculation of football speed
+![The speed of the football](/Output/speed_output.jpg)
