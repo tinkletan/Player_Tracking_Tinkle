@@ -198,7 +198,6 @@ def get_video_prediction_with_fallback(video_path, detection_model,yolo_model,  
     frame_width = int(cap.get(cv2.CAP_PROP_FRAME_WIDTH))
     frame_height = int(cap.get(cv2.CAP_PROP_FRAME_HEIGHT))
 
-    # If an output path is provided, initialize a video writer to save the output
     if output_video_path:
         fourcc = cv2.VideoWriter_fourcc(*'mp4v') 
         out = cv2.VideoWriter(output_video_path, fourcc, fps, (frame_width, frame_height))
@@ -207,18 +206,17 @@ def get_video_prediction_with_fallback(video_path, detection_model,yolo_model,  
     zerocnt = 0
     last_pos = None
     while True:
-        # Read the next frame
         ret, frame = cap.read()
         if not ret:
-            break  # If no frame is returned, we've reached the end of the video
+            break  
         print(f"frame {yolocnt + sahicnt+zerocnt}")
 
         
         result_yolo = yolo_model.predict(frame)
         result_yolo = result_yolo[0]
-        
-        
-        if result_yolo.boxes.shape[0] == 0:  # If YOLO detects nothing
+
+        # If YOLO detects nothing    
+        if result_yolo.boxes.shape[0] == 0:  
             # Fall back to SAHI detection
             result_sahi = get_sliced_prediction(
                 frame,
@@ -236,7 +234,6 @@ def get_video_prediction_with_fallback(video_path, detection_model,yolo_model,  
                 zerocnt += 1
             else:
                 cv2.putText(frame, f'SAHI: detected {len(object_prediction_list)} items.', (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
-                # Draw bounding boxes on the frame
                 for object_prediction in object_prediction_list:
                     frame = draw_bbox_sahi(frame, object_prediction)
                 sahicnt += 1
@@ -253,8 +250,6 @@ def get_video_prediction_with_fallback(video_path, detection_model,yolo_model,  
             if(len(tmp_boxes) > 0):
                 last_pos = get_center(trans_to_bbox(tmp_boxes[0]))
 
-
-        # Write the annotated frame to output video if an output path was provided
         if output_video_path:
             out.write(frame)
         cv2.imwrite(os.path.join("out_img",f'{sahicnt+yolocnt+zerocnt}.jpg'),frame)
@@ -263,7 +258,6 @@ def get_video_prediction_with_fallback(video_path, detection_model,yolo_model,  
     print(f"yolocnt: {yolocnt}")
     print(f"sahicnt: {sahicnt}")
     print(f"zerocnt: {zerocnt}")
-    # Release resources
     cap.release()
     if output_video_path:
         out.release()
