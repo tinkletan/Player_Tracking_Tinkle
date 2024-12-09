@@ -16,5 +16,9 @@ Yolo only:
 ![The comparison of increasing the sahi algorithm](/Output/yolo_only.jpg "Yolo only")
 Apply Sahi:
 ![The comparison of increasing the sahi algorithm](/Output/with_sahi.jpg "Apply Sahi")
+
+We can see that using the SAHI algorithm can indeed improve the accuracy of small object detection.However, since the sahi algorithm is to slice and detect the content and then merge it, it takes a lot of time, which will affect the efficiency of real-time detection. So I decided to use the sahi algorithm only in some frames.
+
+
 ## Calculate football speed
 - This part has yet to be perfected
